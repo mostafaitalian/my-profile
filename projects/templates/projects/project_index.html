@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block cont %}
+  <h1 class="text-center" style="font-family: 'exo1';">Projects</h1>
+  <div class="row m-3">
+      
+      {% for project in projects %}
+          <div class="col-lg-4 col-md-6 col-sm-10 rounded shadow" >
+            <div class="card m-2 p-3 ">
+                <img src="{% url 'home' %}{{project.image}}" alt="" class="card-img-top">
+                <h5 class='card-title text-center' style="font-family: 'exo1';color: rgb(29, 12, 12); margin: 8px 0px;">
+                    {{project.title}}
+                    
+                </h5>
+                <p class="card-text" style="font-family: 'Times New Roman', Times, serif;">
+                    {{project.description}}
+                </p>
+                <a href="{% url 'projects:project_detail' project.id %}" class="btn btn-primary">Read more</a>
+            </div>
+          </div>
+      {% endfor %}
+          
+  </div>
+{% endblock cont %}

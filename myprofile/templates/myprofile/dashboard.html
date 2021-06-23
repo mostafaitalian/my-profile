@@ -1,0 +1,613 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- {% load js %} -->
+{% block css1 %}
+<link rel="stylesheet" href="{% static 'css/styleDashboard.css' %}">
+
+<style>
+    header {
+        border-bottom: 1px solid black;
+        box-shadow: 0px 3px 2px 2px lightgrey;
+        position: sticky;
+        top: -25px;
+    }
+
+    .sidebar {
+        float: left;
+        background-color: teal;
+        height: 120vh;
+        position: sticky;
+        top: 0%
+    }
+
+    .content {
+        float: left;
+
+    }
+
+    /* .nav2-container, #nav2{
+          position: -webkit-sticky;
+          position: sticky;
+          background-color: darkcyan;
+          top: -10px;
+      } */
+
+    .sidebar-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .img-size {
+        width: 80px;
+    }
+
+    .sidebar-content div {
+        width: 100%;
+        border-bottom: 1px solid gray;
+        margin: 5px 2px;
+        padding: 5px 2px;
+        text-align: center;
+    }
+
+    .sidebar-content div:first-of-type {
+        background: linear-gradient(rgba(25, 10, 45, 0.9), rgba(230, 230, 230, 0.5));
+        padding: 5px 0px;
+        margin: 0px;
+    }
+
+    .sidebar-content div:nth-of-type(2) {
+        width: 80%
+    }
+
+    .sidebar-content div p {
+        font-family: "exo1";
+    }
+
+    .sidebar-content div p.developer {
+        color: darkorange;
+        font-size: medium;
+    }
+
+    .div-d-content .item {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 90%;
+        min-height: 110vh;
+        position: relative;
+        /* background-color: aqua; */
+        margin: 20px auto;
+        border-radius: 10px;
+        box-shadow: 0px 5px 3px 3px black;
+
+    }
+
+    @keyframes morph {
+        0% {
+            border-radius: 20% 50% 60% 90%/40% 60% 30% 80%;
+        }
+
+        40% {
+            border-radius: 50% 20% 60% 60%/40% 60% 30% 30%;
+        }
+
+        60% {
+            border-radius: 40% 50% 60% 30%/40% 60% 30% 80%;
+        }
+
+        80% {
+            border-radius: 20% 50% 60% 30%/40% 60% 300% 80%;
+        }
+
+        100% {
+            border-radius: 20% 50% 60% 90%/40% 60% 30% 80%;
+        }
+    }
+    @keyframes popup {
+        0%{
+            transform: scaleX(1.02);
+            box-shadow: 0px 2px 3px gray;
+        }
+        /* 50%{
+            transform: scaleX(0.9);
+        } */
+        100%{
+            transform: scaleX(1);
+        }
+    }
+    .image {
+        background-image: url('/media/image/IMG_20200928_224001.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+        background-blend-mode: multiply;
+        box-shadow: inset 0 0 0 9px rgb(255 255 255 / 30%);
+
+        /* border: 3px solid darkgray; */
+        width: 20vw;
+        height: 20vw;
+        animation: morph 8s ease-in-out 1s infinite;
+    }
+
+    .overview {
+        font-family: 'exo1';
+    }
+
+    .overview p {
+        font-size: large;
+        color: sandybrown;
+    }
+
+    .line2 {
+        border-bottom: 2px solid sandybrown;
+        position: absolute;
+        width: 100px;
+        top: 3%;
+        padding: 12px;
+    }
+
+    .line1 {
+        border-bottom: 2px solid darkcyan;
+        position: absolute;
+        top: 5%;
+        width: 100px;
+        padding: 12px;
+    }
+    .line4 {
+        border-bottom: 2px solid sandybrown;
+        /* position: absolute; */
+        width: 100px;
+        /* top: 3%; */
+        padding-top: 5px;
+    }
+
+    .line3 {
+        border-bottom: 2px solid darkcyan;
+        /* position: absolute; */
+        /* top: 5%; */
+        width: 100px;
+        padding-top: 5px;
+    }
+    .nav-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav-content a {
+        margin: 5px;
+        font-size: larger;
+        font-family: "axo1";
+    }
+    .personal-skills-li div{
+        padding-left: 5px;
+        border-left: 1px solid royalblue;
+        transition: all 2s ease-in ;
+        margin: 5px;
+    }
+    .personal-skills-li div:hover{
+        animation: popup 1s ease-in forwards;
+
+    }
+    .personal-skills-li div h4{
+        font-family: "exo";
+        color:white;
+        background-color: darkblue;
+        margin:5px 2px;
+        padding: 0px 4px;
+    }
+    .btn-modal{
+        height: auto;
+        float: right;
+    }
+    .personal-skills-li div p{
+        font-family: "exo1";
+        font-size: large;
+
+        color: gray;
+    }
+    .personal-skills-ul{
+        list-style: none;
+        list-style-position: outside;
+    }
+    @media only screen and (max-width: 750px) {
+        .mmodal{
+        
+        margin-left: 50px !important;
+    }
+        .div-d-content .item {
+            flex-direction: column !important;
+
+        }
+
+        .image {
+            width: 30vh;
+            height: 30vh;
+        }
+
+        .item2-container {
+            flex-direction: column !important;
+        }
+
+        .item2-container div {
+            width: 95% !important;
+            padding: 10px !important;
+        }
+
+        .div-d-content .item {
+            height: auto !important;
+        }
+    }
+ @media only screen and(max-width:580px) {
+    .mmodal{
+        margin-left: 10px !important;
+    }
+ }
+    .hidden {
+        display: none !important;
+    }
+
+    #item2,
+    #item3, #item4, #item5, #item6 {
+        flex-direction: column;
+    }
+
+    #item3 h1, #item2 h1 {
+        color: lightgray;
+        position: relative;
+        font-size: 50px;
+
+
+    }
+
+    #item3 h1 span, #item2 h1 span {
+        position: absolute;
+        left: 30%;
+        color: tomato;
+        font-size: 20px;
+        line-height: 3rem;
+        font-size: xx-large;
+        font-weight: bold;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        /* background-color: brown; */
+        padding: 5px;
+        border-right: 1px solid;
+
+    }
+
+    .info div {
+        width: 95% !important;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+    }
+
+    .info h2 {
+        background-color: tomato;
+        padding: 3px;
+
+    }
+
+    .info div h4 {
+        color: gray;
+    }
+
+    .item2-container {
+        display: flex;
+        width: 90%;
+
+    }
+
+    .item2-container div {
+        width: 50%;
+        padding: 10px;
+    }
+    .mmodal{
+        margin-left: 50px !important;
+    }
+    .item h1{
+        font-family: "exo1";
+    }
+    .list-side{
+        /* background-color: white; */
+        display: block;
+        list-style: none;
+        font-family: 'exo1';
+        font-size: 2rem;
+        padding: 0px;
+        padding: 5px;
+        border-radius: 4px;
+        /* color: linear-gradient(rgba(25, 10, 45, 0.9), rgba(230, 230, 230, 0.5));; */
+    }
+    .list-side li{
+        padding: 5px;
+        width: 100%;
+        /* background:linear-gradient(rgba(25, 10, 45, 0.9), rgba(230, 230, 230, 0.5)); */
+
+    }
+</style>
+{% endblock css1 %}
+
+{% block content %}
+<div id="cont" class="div-d-content">
+
+    <div id="item1" class="item">
+
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="image"></div>
+        <div class="overview">
+            <h1>Mostafa Mohamed</h1>
+            <p>Web developer<span>(hope i can)</span></p>
+        </div>
+    </div>
+    <div id="item2" class="item hidden">
+        <h1>Who am<span>I?</span></h1>
+
+        <div class="image"></div>
+        <div class="overview">
+            <h1>Mostafa Mohamed</h1>
+            <p>Web developer<span>(hope i can)</span></p>
+        </div>
+    </div>
+    <div id="item3" class="item hidden">
+        <h1>About<span>Me</span></h1>
+        <div class="item2-container">
+            <div class="info">
+                <h2>
+                    Personal Info. !!
+                </h2>
+                <div>
+                    <h3>Name: </h3>
+                    <h4>{{profile.get_full_name}}</h4>
+                </div>
+                <div>
+                    <h3>
+                        Title:
+                    </h3>
+                    <h4>
+                        {{ profile.title|title}}
+                    </h4>
+                </div>
+                <div>
+                    <h3>
+                        Date of Birth:
+                    </h3>
+                    <h4>
+                        {{ profile.date_of_birth|date:"d-m-y"}}
+                    </h4>
+                </div>
+                <div>
+                    <h3>
+                        Working:
+                    </h3>
+                    <h4>
+
+                        {{ profile.currently_working|yesno}}
+                    </h4>
+                </div>
+                <div>
+                    <h3>
+                        Freelancing:
+                    </h3>
+                    <h4>
+                        {{profile.freelancing|title}}
+                    </h4>
+                </div>
+
+            </div>
+            <div>
+                <h1>Skill Chart</h1>
+                <canvas id="myChart" width="100" height="100"></canvas>
+            </div>
+        </div>
+
+    </div>
+    <div id="item4" class="item hidden">
+        <h1>Personal Skills</h1>
+        <div class="line3"></div>
+        <ul class="personal-skills-ul">
+            {% for skill in profile.personal_skills.all %}
+            <li class="personal-skills-li">
+                <div>
+                    <h4>{{ skill.skill_name }}</h4>
+                    <p>{{ skill.skill_description }}</p>
+                    <p>{{request.path}}</p>
+                </div>
+                
+            </li>
+            {% empty%}
+            <li>
+                <div>
+                    <p>
+                        No skills, you should add new skills, try work more on yourself
+                    </p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="item5" class="item hidden">
+        <h1>Technical Skills</h1>
+        <div class="line4"></div>
+
+        <ul class="personal-skills-ul">
+            {% for skill in profile.technical_skills.all %}
+            <li class="personal-skills-li">
+                <div >
+                    <h4>{{ skill.skill_name }}
+
+                        <!-- Button trigger modal -->
+                        <button type="button" onclick="btnModalClick(this)"  class="btn btn-danger btn-modal" data-toggle="modal" data-target="#exampleModal{{skill.id}}">
+                            Find More
+                          </button>
+                          
+                          <div class="modal fade mmodal" id="exampleModal{{skill.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  ...
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </h4>
+                    <p>{{skill.skill_description}}</p>
+                    
+                </div>
+            </li>
+            {% empty%}
+            <li>
+                <div>
+                    <p>
+                        No skills, you should add new skills, try work more on yourself
+                    </p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div class="nav-content">
+    <a class="prev-link"><i class="fas fa-arrow-left"></i></a>
+    <a id="next" class="next-link"><i class="fas fa-arrow-right"></i></a>
+</div>
+{% endblock content %}
+
+
+
+{% block sidebar %}
+<div class="sidebar-content">
+    <div>
+        <img class="center rounded-circle img-size" src="/media/image/IMG_20200928_224001.jpg" alt="" srcset="">
+    </div>
+    <div>
+        <p class='developer'>{{ profile.first_name }} {{ profile.last_name }}</p>
+    </div>
+    <ul class="list-side">
+        <li>About me</li>
+        <li>Who am I?</li>
+        <li>Personal Info</li>
+        <li>Personal Skills</li>
+        <li>Technical Skills</li>
+    </ul>
+
+
+
+</div>
+{% endblock sidebar %}
+
+
+{% block script1 %}
+<script src="{% static 'system_js/chart.min.js'  %}"></script>
+
+<script>
+    function btnModalClick(x){
+    alert(x.parentElement.parentElement.parentElement.className)    
+    x.parentElement.parentElement.style.animation = 'none';
+}
+
+    document.addEventListener('DOMContentLoaded', function () {
+        let divs = document.getElementsByClassName('item');
+        let length = divs.length;
+        let lists = document.querySelectorAll('.list-side li')
+        let counter = 0
+        lists[0].style.color='white'
+        let currentItem = 0
+        for (let i = 0; i < lists.length; i++){
+                lists[i].addEventListener('click', function(){
+                    if(currentItem==0 && i ==0){
+                        
+                    }
+                    else{
+                        divs[i].classList.remove('hidden');
+                    divs[currentItem].classList.add('hidden');
+                    lists[i].style.color = 'white';
+                    lists[currentItem].style.color='black';
+                    currentItem = i
+                    counter = i                        
+                    }
+
+
+                })
+            }
+        document.getElementById('next').addEventListener('click', function (event) {
+            event.preventDefault();
+            counter++;
+            currentItem = counter
+            // alert(counter);
+            if (counter === length) {
+                counter = 0
+            }
+
+            for (let i = 0; i < length; i++) {
+                if (i !== counter) {
+                    divs[i].classList.add('hidden');
+                    lists[i].style.color = 'black';
+                } else {
+                    divs[i].classList.remove('hidden');
+                    lists[i].style.color = 'white';
+                }
+            }
+
+
+        })
+        const labels = ['python', 'c#', 'javascript', 'html', 'css'];
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'My First Dataset',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ], borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+            }]
+        };
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        };
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, config);
+    })
+</script>
+{% endblock script1 %}

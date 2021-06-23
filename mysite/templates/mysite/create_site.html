@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block css1 %}
+    <style>
+        @keyframes moveinout {
+            0%{
+                transform: scaleX(1.2);
+            }
+            25%{
+                transform: scaleX(0.8);
+            }
+
+        }
+        .con{
+            width:80%;
+            margin: auto;
+        }
+        form{
+            border-left: 1px solid red;
+            border-right: 1px solid red;
+            border-bottom: 1px solid red;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        form div label{
+            transition: all 2s ease-in-out;
+            font-family: "exo";
+            border: none;
+            color: teal;
+            animation: moveinout 5s;
+            animation-iteration-count: infinite
+        
+        }
+        form div div input, form div div textarea, form div div select{
+            font-family: "exo" !important;
+            border: none !important;
+            background-color: teal !important;
+            color: white !important;
+        }
+        .btn-div{
+            display: block;
+            text-align: center;
+            margin: 10px 0px;
+            padding:4px 0px;
+        }
+        button{
+            
+            background-color: silver;
+            color: black;
+            border: none;
+            font-family: 'exo1';
+        }
+        .title-div{
+            text-align: center;
+            font-family: "exo1";
+            background-color: red;
+            color: white
+        }
+    </style>
+{% endblock css1 %}
+
+{% block content %}
+<div class="con">
+    <div class="title-div">
+        <h2>Create Site History</h2>
+    </div>
+    <form class="p-4" action="" method="get" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form | crispy}}
+    <div class="btn-div">
+        <button type="submit" class='btn btn-primary rounded'>Add Site</button>
+
+    </div>
+    </form>
+</div>
+{% endblock content %}
